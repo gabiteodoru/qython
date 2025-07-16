@@ -1,0 +1,41 @@
+def golden_section_search(f, a, b):
+    phi = (1 + 5**0.5) / 2
+    resphi = 2 - phi
+
+    x1 = a + resphi * (b - a)
+    x2 = b - resphi * (b - a)
+    f1 = f(x1)
+    f2 = f(x2)
+
+    def step(state):
+        # Extract state values
+        state_a = state[0]
+        state_b = state[1]
+        state_x1 = state[2]
+        state_x2 = state[3]
+        state_f1 = state[4]
+        state_f2 = state[5]
+        
+        if state_f1 > state_f2:
+            new_a = state_x1
+            new_x1 = state_x2
+            new_f1 = state_f2
+            new_x2 = state_b - resphi * (state_b - new_a)
+            new_f2 = f(new_x2)
+            new_b = state_b
+        
+        if state_f1 <= state_f2:
+            new_b = state_x2
+            new_x2 = state_x1
+            new_f2 = state_f1
+            new_x1 = state_a + resphi * (new_b - state_a)
+            new_f1 = f(new_x1)
+            new_a = state_a
+        
+        return [new_a, new_b, new_x1, new_x2, new_f1, new_f2]
+
+    initial_state = [a, b, x1, x2, f1, f2]
+    final_state = converge(step, starting_from=initial_state)
+    result_a = final_state[0]
+    result_b = final_state[1]
+    return (result_a + result_b) / 2

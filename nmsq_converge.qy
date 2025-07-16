@@ -1,0 +1,21 @@
+def nmsq_converge(x):
+    """
+    Compute square root using Newton's method with converge statement.
+    
+    Args:
+        x: Number to find square root of
+    
+    Returns:
+        Square root of x
+    """
+    if x < 0:
+        raise ValueError("Cannot compute square root of negative number")
+    if x == 0:
+        return 0
+    
+    # Use the new converge syntax - no precision needed!
+    converge on guess starting from x/2:
+        new_guess = (guess + x / guess) / 2
+        guess = new_guess
+    
+    return guess

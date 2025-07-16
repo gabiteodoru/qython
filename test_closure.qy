@@ -1,0 +1,7 @@
+def sqrt_newton(x):
+    def step(guess):
+        new_guess = (guess + x / guess) / 2
+        return new_guess
+    
+    result = converge(step, starting_from=x/2)
+    return result

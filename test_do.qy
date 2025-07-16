@@ -1,0 +1,8 @@
+def count_up(n):
+    """Test function using do syntax"""
+    counter = 0
+    
+    do n times:
+        counter = counter + 1
+    
+    return counter
